@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Calendar,
   ChevronDown,
@@ -12,11 +12,52 @@ import {
 import TeacherSubstitutionModule from "./teacher-substitution-component";
 import ScheduleSettings from "./schedule-settings-component";
 
+// Define types for the mock data
+type Teacher = {
+  id: number;
+  name: string;
+  department: string;
+  workload: number;
+};
+
+type ScheduleChange = {
+  id: number;
+  teacher: string;
+  date: string;
+  status: "Ожидает подтверждения" | "Подтверждено";
+};
+
+type MockData = {
+  teachers: Teacher[];
+  scheduleChanges: ScheduleChange[];
+  reportTypes: string[];
+};
+
+// Define props for sidebar item
+type SidebarItemProps = {
+  icon: React.ReactNode;
+  label: string;
+  id: string;
+};
+
+// Define props for stat card
+type StatCardProps = {
+  title: string;
+  value: string;
+  color: string;
+};
+
+// Define props for dashboard card
+type DashboardCardProps = {
+  title: string;
+  children: React.ReactNode;
+};
+
 const MainLayout = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState<string>("dashboard");
 
   // Имитация данных для демонстрации
-  const mockData = {
+  const mockData: MockData = {
     teachers: [
       { id: 1, name: "Рахимов А.К.", department: "Информатика", workload: 820 },
       { id: 2, name: "Исмаилов С.Т.", department: "Математика", workload: 760 },
@@ -87,7 +128,7 @@ const MainLayout = () => {
   );
 
   // Элемент меню
-  const SidebarItem = ({ icon, label, id }) => (
+  const SidebarItem = ({ icon, label, id }: SidebarItemProps) => (
     <div
       className={`flex items-center p-3 rounded-lg cursor-pointer ${
         activeTab === id ? "bg-blue-600" : "hover:bg-gray-700"
@@ -153,7 +194,7 @@ const MainLayout = () => {
   );
 
   // Карточка статистики
-  const StatCard = ({ title, value, color }) => (
+  const StatCard = ({ title, value, color }: StatCardProps) => (
     <div className="bg-white rounded-lg shadow p-4">
       <div
         className={`${color} text-white rounded-full w-12 h-12 flex items-center justify-center mb-3`}
@@ -166,7 +207,7 @@ const MainLayout = () => {
   );
 
   // Карточка для дашборда
-  const DashboardCard = ({ title, children }) => (
+  const DashboardCard = ({ title, children }: DashboardCardProps) => (
     <div className="bg-white rounded-lg shadow">
       <div className="p-4 border-b font-medium">{title}</div>
       <div className="divide-y">{children}</div>
@@ -243,112 +284,7 @@ const MainLayout = () => {
   );
 
   // Компонент для подачи запроса на замену
-  const Substitutions = () => (
-    <TeacherSubstitutionModule />
-    // <div className="space-y-6">
-    //   <h2 className="text-2xl font-bold mb-4">Система замен преподавателей</h2>
-
-    //   <div className="bg-white rounded-lg shadow p-6">
-    //     <h3 className="text-lg font-medium mb-4">Подать заявку на замену</h3>
-
-    //     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    //       <div>
-    //         <label className="block text-sm text-gray-600 mb-1">
-    //           Дата отсутствия
-    //         </label>
-    //         <input type="date" className="w-full p-2 border rounded" />
-    //       </div>
-    //       <div>
-    //         <label className="block text-sm text-gray-600 mb-1">Причина</label>
-    //         <select className="w-full p-2 border rounded">
-    //           <option>Болезнь</option>
-    //           <option>Командировка</option>
-    //           <option>Личные обстоятельства</option>
-    //           <option>Другое</option>
-    //         </select>
-    //       </div>
-    //     </div>
-
-    //     <div className="mb-4">
-    //       <label className="block text-sm text-gray-600 mb-1">
-    //         Комментарий
-    //       </label>
-    //       <textarea className="w-full p-2 border rounded" rows="3"></textarea>
-    //     </div>
-
-    //     <div className="border-t pt-4">
-    //       <h4 className="font-medium mb-2">Дисциплины, требующие замены:</h4>
-
-    //       <div className="bg-gray-50 p-3 rounded mb-3">
-    //         <div className="flex justify-between">
-    //           <div>
-    //             <div className="font-medium">Программирование</div>
-    //             <div className="text-sm text-gray-500">
-    //               10:00 - 11:20, Группа Информ-302, Ауд. 214
-    //             </div>
-    //           </div>
-    //           <div>
-    //             <select className="p-1 border rounded text-sm">
-    //               <option>Выбрать заместителя</option>
-    //               <option>Исмаилов С.Т.</option>
-    //               <option>Каримова Н.Д.</option>
-    //             </select>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       <div className="bg-gray-50 p-3 rounded">
-    //         <div className="flex justify-between">
-    //           <div>
-    //             <div className="font-medium">Базы данных</div>
-    //             <div className="text-sm text-gray-500">
-    //               12:00 - 13:20, Группа Информ-302, Ауд. 315
-    //             </div>
-    //           </div>
-    //           <div>
-    //             <select className="p-1 border rounded text-sm">
-    //               <option>Выбрать заместителя</option>
-    //               <option>Исмаилов С.Т.</option>
-    //               <option>Каримова Н.Д.</option>
-    //             </select>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     <div className="mt-6">
-    //       <button className="bg-blue-500 text-white px-4 py-2 rounded">
-    //         Отправить заявку
-    //       </button>
-    //     </div>
-    //   </div>
-
-    //   <div className="bg-white rounded-lg shadow">
-    //     <div className="p-4 border-b font-medium">Статус ваших заявок</div>
-    //     <div className="divide-y">
-    //       {mockData.scheduleChanges.map((change) => (
-    //         <div key={change.id} className="flex justify-between p-4">
-    //           <div>
-    //             <div className="font-medium">{change.date}</div>
-    //             <div className="text-sm text-gray-500">
-    //               Причина: Командировка
-    //             </div>
-    //           </div>
-    //           <div
-    //             className={`${
-    //               change.status === "Подтверждено"
-    //                 ? "text-green-500"
-    //                 : "text-orange-500"
-    //             }`}
-    //           >
-    //             {change.status}
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
-  );
+  // const Substitutions = () => <TeacherSubstitutionModule />;
 
   // Компонент формирования отчетов
   const Reports = () => (
@@ -380,7 +316,7 @@ const MainLayout = () => {
   );
 
   // Основной контент
-  const renderContent = () => {
+  const renderContent = (): React.ReactNode => {
     switch (activeTab) {
       case "dashboard":
         return <Dashboard />;

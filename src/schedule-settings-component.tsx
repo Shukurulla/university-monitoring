@@ -1,4 +1,3 @@
-import React from "react";
 import { Save, Trash2, Plus } from "lucide-react";
 
 const ScheduleSettings = () => {

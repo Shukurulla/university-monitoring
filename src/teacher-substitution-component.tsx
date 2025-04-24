@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  Calendar,
   Clock,
-  FileText,
   AlertCircle,
   CheckCircle,
-  User,
   Search,
   ChevronDown,
-  ChevronRight,
 } from "lucide-react";
 
 const TeacherSubstitutionModule = () => {

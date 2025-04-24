@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Calendar, Download } from 'lucide-react';
+import { useState } from "react";
+import { Download } from "lucide-react";
 
 // Импортируем все созданные компоненты
 // В реальном проекте здесь были бы настоящие импорты
@@ -8,7 +8,9 @@ const ScheduleViewer = () => {
   return (
     <div className="p-8 bg-blue-50 rounded-lg text-center">
       <h3 className="text-xl font-medium">Просмотр расписания</h3>
-      <p className="mt-2 text-gray-600">Компонент для просмотра и редактирования расписания занятий</p>
+      <p className="mt-2 text-gray-600">
+        Компонент для просмотра и редактирования расписания занятий
+      </p>
     </div>
   );
 };
@@ -18,7 +20,9 @@ const ClassroomManager = () => {
   return (
     <div className="p-8 bg-green-50 rounded-lg text-center">
       <h3 className="text-xl font-medium">Управление аудиториями</h3>
-      <p className="mt-2 text-gray-600">Компонент для управления аудиторным фондом</p>
+      <p className="mt-2 text-gray-600">
+        Компонент для управления аудиторным фондом
+      </p>
     </div>
   );
 };
@@ -28,7 +32,9 @@ const ScheduleSettings = () => {
   return (
     <div className="p-8 bg-yellow-50 rounded-lg text-center">
       <h3 className="text-xl font-medium">Настройки расписания</h3>
-      <p className="mt-2 text-gray-600">Компонент для настройки параметров составления расписания</p>
+      <p className="mt-2 text-gray-600">
+        Компонент для настройки параметров составления расписания
+      </p>
     </div>
   );
 };
@@ -38,23 +44,30 @@ const ScheduleGenerator = () => {
   return (
     <div className="p-8 bg-purple-50 rounded-lg text-center">
       <h3 className="text-xl font-medium">Генератор расписания</h3>
-      <p className="mt-2 text-gray-600">Компонент для автоматической генерации расписания</p>
+      <p className="mt-2 text-gray-600">
+        Компонент для автоматической генерации расписания
+      </p>
     </div>
   );
 };
 
 // Главный компонент для модуля расписания
 const ScheduleModule = () => {
-  const [activeTab, setActiveTab] = useState('schedule');
+  const [activeTab, setActiveTab] = useState("schedule");
 
   // Выбор активной вкладки
   const renderTabContent = () => {
-    switch(activeTab) {
-      case 'schedule': return <ScheduleViewer />;
-      case 'classrooms': return <ClassroomManager />;
-      case 'settings': return <ScheduleSettings />;
-      case 'generator': return <ScheduleGenerator />;
-      default: return <ScheduleViewer />;
+    switch (activeTab) {
+      case "schedule":
+        return <ScheduleViewer />;
+      case "classrooms":
+        return <ClassroomManager />;
+      case "settings":
+        return <ScheduleSettings />;
+      case "generator":
+        return <ScheduleGenerator />;
+      default:
+        return <ScheduleViewer />;
     }
   };
 
@@ -73,36 +86,50 @@ const ScheduleModule = () => {
       <div className="bg-white rounded-lg shadow">
         <div className="border-b">
           <div className="flex">
-            <button 
-              className={`px-6 py-3 font-medium text-sm ${activeTab === 'schedule' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
-              onClick={() => setActiveTab('schedule')}
+            <button
+              className={`px-6 py-3 font-medium text-sm ${
+                activeTab === "schedule"
+                  ? "border-b-2 border-blue-500 text-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("schedule")}
             >
               Расписание
             </button>
-            <button 
-              className={`px-6 py-3 font-medium text-sm ${activeTab === 'classrooms' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
-              onClick={() => setActiveTab('classrooms')}
+            <button
+              className={`px-6 py-3 font-medium text-sm ${
+                activeTab === "classrooms"
+                  ? "border-b-2 border-blue-500 text-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("classrooms")}
             >
               Аудитории
             </button>
-            <button 
-              className={`px-6 py-3 font-medium text-sm ${activeTab === 'settings' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
-              onClick={() => setActiveTab('settings')}
+            <button
+              className={`px-6 py-3 font-medium text-sm ${
+                activeTab === "settings"
+                  ? "border-b-2 border-blue-500 text-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("settings")}
             >
               Настройки
             </button>
-            <button 
-              className={`px-6 py-3 font-medium text-sm ${activeTab === 'generator' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`}
-              onClick={() => setActiveTab('generator')}
+            <button
+              className={`px-6 py-3 font-medium text-sm ${
+                activeTab === "generator"
+                  ? "border-b-2 border-blue-500 text-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => setActiveTab("generator")}
             >
               Генератор расписания
             </button>
           </div>
         </div>
 
-        <div className="p-6">
-          {renderTabContent()}
-        </div>
+        <div className="p-6">{renderTabContent()}</div>
       </div>
 
       {/* Сводная информация */}
@@ -110,7 +137,9 @@ const ScheduleModule = () => {
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="text-gray-500 text-sm mb-1">Преподавателей</div>
           <div className="text-2xl font-bold">124</div>
-          <div className="mt-2 text-xs text-gray-500">Активных в этом семестре</div>
+          <div className="mt-2 text-xs text-gray-500">
+            Активных в этом семестре
+          </div>
         </div>
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="text-gray-500 text-sm mb-1">Групп</div>
